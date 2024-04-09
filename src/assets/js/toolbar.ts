@@ -17,10 +17,10 @@ class NgToolbar {
     this.toggleButtons = this.el.querySelectorAll('.js-toggle-mode');
 
     this.editableComponentBlocks = document.querySelectorAll(
-      '[data-component-location-id]'
+      '[data-component-content-id]'
     );
     this.editableItemBlocks = document.querySelectorAll(
-      '[data-item-location-id]'
+      '[data-item-content-id]'
     );
     this.adminRemoteEditUrl = this.el.dataset.adminRemoteEditUrl;
 
@@ -113,15 +113,15 @@ class NgToolbar {
 
     if (editButton && editOutline) return;
 
-    const locationId =
-      block.dataset.componentLocationId || block.dataset.itemLocationId;
+    const contentId =
+      block.dataset.componentContentId || block.dataset.itemContentId;
 
-    if (!locationId) {
-      console.warn(`Location id on ${block} is missing`);
+    if (!contentId) {
+      console.warn(`Content id on ${block} is missing`);
       return;
     }
 
-    block.insertAdjacentHTML('beforeend', this.editButtonMarkup(locationId));
+    block.insertAdjacentHTML('beforeend', this.editButtonMarkup(contentId));
 
     if (block.style.position)
       block.setAttribute('data-inital-position', block.style.position);
@@ -167,9 +167,9 @@ class NgToolbar {
     `;
   }
 
-  editButtonMarkup(locationId: string) {
-    // `${this.adminRemoteEditUrl}/view/remote/content/${locationId}`;
-    const href = `${this.adminRemoteEditUrl}/content/view/full/${locationId}`;
+  editButtonMarkup(contentId: string) {
+    // `${this.adminRemoteEditUrl}/view/remote/content/${remoteId}`;
+    const href = `${this.adminRemoteEditUrl}view/content/${contentId}`;
     return `
       <a href='${href}' target="_blank" style="${this.editButtonStyles}" class="js-edit-button">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
