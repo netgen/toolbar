@@ -1,0 +1,23 @@
+{% macro data_location_id(content_block = null, location = null) %}
+    {% if content_block %}
+        {% set block_item_location_id = null %}
+
+        {% if
+            content_block.hasParameter('content')
+            and content_block.parameter('content').parameterDefinition.defaultValue != "Text"
+            and content_block.parameter('content').valueObject is defined
+            and content_block.parameter('content').valueObject is not null
+            and content_block.parameter('content').valueObject.contentInfo.contentTypeIdentifier starts with "ng_component_"
+        %}
+            {% set block_item_location_id = content_block.parameter('content').valueObject.mainLocationId %}
+        {% endif %}
+
+        {% if block_item_location_id is not null %}
+            data-component-location-id="{{ block_item_location_id }}"
+        {% endif %}
+    {% else if location %}
+        {% if location.id is not null %}
+            data-item-location-id="{{ location.id }}"
+        {% endif %}
+    {% endif %}
+{% endmacro %}
