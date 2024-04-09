@@ -9,8 +9,9 @@
             and content_block.parameter('content').valueObject is not null
             and content_block.parameter('content').valueObject.contentInfo.contentTypeIdentifier starts with "ng_component_"
         %}
-            {% set block_item_content_id = content_block.parameter('content').valueObject.mainLocationId %}
+            {% set block_item_content_id = content_block.parameter('content').valueObject.id %}
         {% endif %}
+
 
         {% if block_item_content_id is not null %}
             data-component-content-id="{{ block_item_content_id }}"
