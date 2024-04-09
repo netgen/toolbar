@@ -14,7 +14,7 @@
                         target="_blank"
                         href="{{ path('ibexa.content.view', { 'contentId': content.id, 'siteaccess': admin_siteaccess_name }) }}"
                     >
-                        <img src="{{ asset('images/ngtoolbar/ibexa-logo.svg') }}"  />
+                        <img src="{{ asset('bundles/netgentoolbar/images/ibexa-logo.svg') }}"  />
                         {{ 'ngtoolbar.admin_interface'|trans }}
                     </a>
                 </li>
@@ -26,7 +26,7 @@
                         target="_blank"
                         href="{{ path('nglayouts_' ~ 'app', {'siteaccess': admin_siteaccess_name, '_fragment': 'layout/' ~ nglayouts.layout.id.toString() }) }}"
                     >
-                        <img src="{{ asset('images/ngtoolbar/layouts-logo.svg') }}"  />
+                        <img src="{{ asset('bundles/netgentoolbar/images/layouts-logo.svg') }}"  />
                         {{ nglayouts.layout.name }}
                     </a>
                 </li>
@@ -35,13 +35,13 @@
             <li class="ngtoolbar__menu-item">
                 <button
                     class="ngtoolbar__menu-link js-toggle-mode"
-                    data-icon-hide-src="{{ asset('images/ngtoolbar/eye-closed.svg') }}"
-                    data-icon-show-src="{{ asset('images/ngtoolbar/eye-open.svg') }}"
+                    data-icon-hide-src="{{ asset('bundles/netgentoolbar/images/eye-closed.svg') }}"
+                    data-icon-show-src="{{ asset('bundles/netgentoolbar/images/eye-open.svg') }}"
                     data-label-show="{{ 'ngtoolbar.view_components'|trans }}"
                     data-label-hide="{{ 'ngtoolbar.hide_components'|trans }}"
                     data-block-type="components"
                 >
-                    <img class="js-toggle-mode-icon" src="{{ asset('images/ngtoolbar/eye-open.svg') }}"  />
+                    <img class="js-toggle-mode-icon" src="{{ asset('bundles/netgentoolbar/images/eye-open.svg') }}"  />
                     <span class="js-toggle-mode-label">
                         {{ 'ngtoolbar.view_components'|trans }}
                     </span>
@@ -50,13 +50,13 @@
             <li class="ngtoolbar__menu-item">
                 <button
                     class="ngtoolbar__menu-link js-toggle-mode"
-                    data-icon-hide-src="{{ asset('images/ngtoolbar/eye-closed.svg') }}"
-                    data-icon-show-src="{{ asset('images/ngtoolbar/eye-open.svg') }}"
+                    data-icon-hide-src="{{ asset('bundles/netgentoolbar/images/eye-closed.svg') }}"
+                    data-icon-show-src="{{ asset('bundles/netgentoolbar/images/eye-open.svg') }}"
                     data-label-show="{{ 'ngtoolbar.view_items'|trans }}"
                     data-label-hide="{{ 'ngtoolbar.hide_items'|trans }}"
                     data-block-type="items"
                 >
-                    <img class="js-toggle-mode-icon" src="{{ asset('images/ngtoolbar/eye-open.svg') }}"  />
+                    <img class="js-toggle-mode-icon" src="{{ asset('bundles/netgentoolbar/images/eye-open.svg') }}"  />
                     <span class="js-toggle-mode-label">
                         {{ 'ngtoolbar.view_items'|trans }}
                     </span>
