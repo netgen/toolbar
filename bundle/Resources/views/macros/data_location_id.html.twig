@@ -1,5 +1,5 @@
 {% macro data_location_id(content_block = null, location = null) %}
-    {% if content_block %}
+    {% if content_block is not null %}
         {% set block_item_location_id = null %}
 
         {% if
@@ -15,7 +15,7 @@
         {% if block_item_location_id is not null %}
             data-component-location-id="{{ block_item_location_id }}"
         {% endif %}
-    {% else if location %}
+    {% elseif location is not null and location is defined %}
         {% if location.id is not null %}
             data-item-location-id="{{ location.id }}"
         {% endif %}
