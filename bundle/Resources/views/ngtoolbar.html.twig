@@ -1,3 +1,4 @@
+{% set offset_selectors = offset_selectors|default(["#page"]) %}
 {% trans_default_domain 'ngtoolbar' %}
 
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
@@ -79,4 +80,11 @@
 
     <script src="{{ asset('bundles/netgentoolbar/assets/toolbar.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('bundles/netgentoolbar/assets/toolbar.css') }}" />
+    <style>
+        {% for selector in offset_selectors %}
+            {{ selector }} {
+                margin-top: var(--ngtoolbar-height);
+            }
+        {% endfor %}
+    </style>
 {% endif %}

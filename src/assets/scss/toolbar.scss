@@ -1,9 +1,9 @@
-// @import 'bootstrap/scss/functions';
-// @import "bootstrap/scss/variables";
-// @import "bootstrap/scss/mixins/breakpoints";
-
 :root {
     --ngtoolbar-height: 2rem;
+
+    @media(max-width: 768px) {
+        --ngtoolbar-height: 0;
+    }
 }
 
 .ngtoolbar {
