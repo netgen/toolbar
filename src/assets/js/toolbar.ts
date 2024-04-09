@@ -22,7 +22,7 @@ class NgToolbar {
     this.editableItemBlocks = document.querySelectorAll(
       '[data-item-location-id]'
     );
-    this.adminRemoteEditUrl = this.el.dataset.adminRemoteEdit;
+    this.adminRemoteEditUrl = this.el.dataset.adminRemoteEditUrl;
 
     if (!this.adminRemoteEditUrl) {
       throw new Error('Admin remote edit url is undefined');
