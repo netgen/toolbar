@@ -130,9 +130,10 @@ class NgToolbar {
   }
 
   toggleViewMode(button: HTMLButtonElement) {
+    this.toggleButtonActive(button);
+
     this.toggleButtonIcon(button);
     this.toggleButtonLabel(button);
-    this.toggleButtonActive(button);
 
     const editableBlocks = this.getEditableBlocks(button.dataset.blockType);
     editableBlocks.forEach((block) => {
