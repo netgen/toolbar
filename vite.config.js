@@ -17,6 +17,6 @@ export default defineConfig({
                 assetFileNames: `[name].[ext]`,
             },
         },
-        outDir: "./bundle/Resources/public/"
+        outDir: "./bundle/Resources/public/assets/"
     },
 });
