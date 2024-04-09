@@ -11,6 +11,11 @@ export default defineConfig({
             input: {
                 toolbar: './src/assets/js/toolbar.ts',
             },
+            output: {
+                entryFileNames: `[name].js`,
+                chunkFileNames: `[name].js`,
+                assetFileNames: `[name].[ext]`,
+            },
         },
         outDir: "./bundle/Resources/public/"
     },

@@ -1,13 +1,8 @@
 {% trans_default_domain 'ngtoolbar' %}
 
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-    {% block toolbar_stylesheets %}
-        {{ vite_entry_link_tags('toolbar') }}
-    {% endblock %}
-
-    {% block toolbar_javascripts %}
-        {{ vite_entry_script_tags('toolbar') }}
-    {% endblock %}
+    <script src="{{ asset('bundles/netgentoolbar/assets/toolbar.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('bundles/netgentoolbar/assets/toolbar.css') }}" />
 
     <div
         id="ngtoolbar"
