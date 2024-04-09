@@ -3,10 +3,10 @@
 // @import "bootstrap/scss/mixins/breakpoints";
 
 :root {
-    --ngeditorbar-height: 2rem;
+    --ngtoolbar-height: 2rem;
 }
 
-.ngeditorbar {
+.ngtoolbar {
     position: fixed;
     width: 100%;
     z-index: 10000;
@@ -18,7 +18,7 @@
     right: 0;
     padding: 0;
     justify-content: space-between;
-    height: var(--ngeditorbar-height);
+    height: var(--ngtoolbar-height);
 
     @media(max-width: 768px) {
         display: none;
@@ -71,7 +71,7 @@
 
 
 #page {
-    &.ngeditorbar-offset {
-        margin-top: var(--ngeditorbar-height);
+    &.ngtoolbar-offset {
+        margin-top: var(--ngtoolbar-height);
     }
 }
