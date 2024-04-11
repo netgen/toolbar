@@ -58,14 +58,14 @@ For additional custom adjustments, a CSS variable `--ngtoolbar-height` is provid
 
 You can override default properties by passing additional parameters to the template. Available properties include:
 
-- `admin_remote_edit_url`
+- `admin_edit_url_base_path`
 - `cms_url`
 - `layouts_url`
 
 ```twig
     {% include "@NetgenToolbar/ngtoolbar.html.twig" with {
         offset_selectors: [],
-        admin_remote_edit_url: "...",
+        admin_edit_url_base_path: "...",
         cms_url: "...",
         layouts_url: "...",
     } %}

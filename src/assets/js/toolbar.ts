@@ -168,7 +168,6 @@ class NgToolbar {
   }
 
   editButtonMarkup(contentId: string) {
-    // `${this.adminEditUrlBasePath}/view/remote/content/${remoteId}`;
     const href = `${this.adminEditUrlBasePath}view/content/${contentId}`;
     return `
       <a href='${href}' target="_blank" style="${this.editButtonStyles}" class="js-edit-button">
