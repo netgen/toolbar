@@ -40,7 +40,7 @@ class NgToolbar {
   }
 
   formatUrl(url: string | undefined) {
-    if (!url || url.charAt(-1) !== '/') return url;
+    if (!url || url.charAt(url.length - 1) !== '/') return url;
 
     return url.slice(0, -1);
   }
