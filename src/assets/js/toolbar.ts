@@ -25,7 +25,7 @@ class NgToolbar {
     this.adminEditUrlBasePath = this.el.dataset.adminEditUrlBasePath;
 
     if (!this.adminEditUrlBasePath) {
-      throw new Error('Admin remote edit url is undefined');
+      throw new Error('Admin edit url is undefined');
     }
 
     this.init();
