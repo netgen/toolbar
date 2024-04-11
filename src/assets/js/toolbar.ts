@@ -22,7 +22,9 @@ class NgToolbar {
     this.editableItemBlocks = document.querySelectorAll(
       '[data-item-content-id]'
     );
-    this.adminEditUrlBasePath = this.el.dataset.adminEditUrlBasePath;
+    this.adminEditUrlBasePath = this.formatUrl(
+      this.el.dataset.adminEditUrlBasePath
+    );
 
     if (!this.adminEditUrlBasePath) {
       throw new Error('Admin edit url is undefined');
@@ -35,6 +37,12 @@ class NgToolbar {
     this.toggleButtons.forEach((button) => {
       button.addEventListener('click', () => this.toggleViewMode(button));
     });
+  }
+
+  formatUrl(url: string | undefined) {
+    if (!url || url.charAt(-1) === '/') return url;
+
+    return `${url}/`;
   }
 
   getEditableBlocks(blockType: string | undefined) {
@@ -168,7 +176,7 @@ class NgToolbar {
   }
 
   editButtonMarkup(contentId: string) {
-    const href = `${this.adminEditUrlBasePath}view/content/${contentId}`;
+    const href = `${this.adminEditUrlBasePath}/view/content/${contentId}`;
     return `
       <a href='${href}' target="_blank" style="${this.editButtonStyles}" class="js-edit-button">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
