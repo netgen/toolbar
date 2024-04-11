@@ -2,15 +2,15 @@
 
 {% set admin_siteaccess_name = admin_siteaccess_name|default("admin") %}
 {% set offset_selectors = offset_selectors|default(["#page"]) %}
-{% set admin_edit_url_base_path = admin_edit_url_base_path|default(path('ibexa.url.alias', {locationId: ibexa.configResolver.parameter('content.tree_root.location_id', null, 'default'), 'siteaccess': admin_siteaccess_name})) %}
-{% set cms_url = cms_url|default(path('ibexa.content.view', { 'contentId': content.id, 'siteaccess': admin_siteaccess_name })) %}
-{% set layouts_url = layouts_url|default(path('nglayouts_' ~ 'app', {'siteaccess': admin_siteaccess_name, '_fragment': 'layout/' ~ nglayouts.layout.id.toString() })) %}
+{% set admin_edit_url_base_url = admin_edit_url_base_url|default(url('ibexa.url.alias', {locationId: ibexa.configResolver.parameter('content.tree_root.location_id', null, 'default'), 'siteaccess': admin_siteaccess_name})) %}
+{% set cms_url = cms_url|default(url('ibexa.content.view', { 'contentId': content.id, 'siteaccess': admin_siteaccess_name })) %}
+{% set layouts_url = layouts_url|default(url('nglayouts_' ~ 'app', {'siteaccess': admin_siteaccess_name, '_fragment': 'layout/' ~ nglayouts.layout.id.toString() })) %}
 
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     <div
         id="ngtoolbar"
         class="ngtoolbar"
-        data-admin-edit-url-base-path="{{ admin_edit_url_base_path }}"
+        data-admin-edit-url-base-url="{{ admin_edit_url_base_url }}"
     >
         <ul class="ngtoolbar__menu">
             {% if content is defined and content is not null %}
@@ -75,7 +75,7 @@
             <li class="ngtoolbar__menu-item">
                 <a
                     class="ngtoolbar__menu-link"
-                    href="{{ path('logout') }}"
+                    href="{{ url('logout') }}"
                 >
                     {{ 'ngtoolbar.logout'|trans }}
                 </a>
