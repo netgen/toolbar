@@ -2,7 +2,7 @@
 
 {% set admin_siteaccess_name = admin_siteaccess_name|default("admin") %}
 {% set offset_selectors = offset_selectors|default(["#page"]) %}
-{% set admin_remote_edit_url = admin_remote_edit_url|default(path('ibexa.url.alias', {locationId: ibexa.configResolver.parameter('content.tree_root.location_id', null, 'default'), 'siteaccess': admin_siteaccess_name})) %}
+{% set admin_edit_url_base_path = admin_edit_url_base_path|default(ibexa_path(ibexa.rootLocation, {siteaccess: admin_siteaccess_name})) %}
 {% set cms_url = cms_url|default(path('ibexa.content.view', { 'contentId': content.id, 'siteaccess': admin_siteaccess_name })) %}
 {% set layouts_url = layouts_url|default(path('nglayouts_' ~ 'app', {'siteaccess': admin_siteaccess_name, '_fragment': 'layout/' ~ nglayouts.layout.id.toString() })) %}
 
@@ -10,7 +10,7 @@
     <div
         id="ngtoolbar"
         class="ngtoolbar"
-        data-admin-remote-edit-url="{{ admin_remote_edit_url }}"
+        data-admin-edit-url-base-path="{{ admin_edit_url_base_path }}"
     >
         <ul class="ngtoolbar__menu">
             {% if content is defined and content is not null %}

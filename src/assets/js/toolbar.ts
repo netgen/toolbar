@@ -9,7 +9,7 @@ class NgToolbar {
   toggleButtons: NodeListOf<HTMLButtonElement>;
   editableComponentBlocks: NodeListOf<HTMLElement>;
   editableItemBlocks: NodeListOf<HTMLElement>;
-  adminRemoteEditUrl: string | undefined;
+  adminEditUrlBasePath: string | undefined;
 
   constructor(el: HTMLElement) {
     this.el = el;
@@ -22,9 +22,9 @@ class NgToolbar {
     this.editableItemBlocks = document.querySelectorAll(
       '[data-item-content-id]'
     );
-    this.adminRemoteEditUrl = this.el.dataset.adminRemoteEditUrl;
+    this.adminEditUrlBasePath = this.el.dataset.adminEditUrlBasePath;
 
-    if (!this.adminRemoteEditUrl) {
+    if (!this.adminEditUrlBasePath) {
       throw new Error('Admin remote edit url is undefined');
     }
 
@@ -168,8 +168,8 @@ class NgToolbar {
   }
 
   editButtonMarkup(contentId: string) {
-    // `${this.adminRemoteEditUrl}/view/remote/content/${remoteId}`;
-    const href = `${this.adminRemoteEditUrl}view/content/${contentId}`;
+    // `${this.adminEditUrlBasePath}/view/remote/content/${remoteId}`;
+    const href = `${this.adminEditUrlBasePath}view/content/${contentId}`;
     return `
       <a href='${href}' target="_blank" style="${this.editButtonStyles}" class="js-edit-button">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
