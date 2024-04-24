@@ -5,11 +5,11 @@
     {% set offset_selectors = offset_selectors|default(["#page"]) %}
 
     {% if content is defined and content is not null %}
-        {% set cms_url = cms_url|default(url('ibexa.content.view', { 'contentId': content.id, 'siteaccess': admin_siteaccess_name })) %}
+        {% set cms_url = url('ibexa.content.view', {'contentId': content.id, 'siteaccess': admin_siteaccess_name}) %}
     {% endif %}
 
     {% if nglayouts.layout is not empty %}
-        {% set layouts_url = layouts_url|default(url('nglayouts_' ~ (nglayouts.debug ? 'dev_' : '') ~ 'app', {'siteaccess': admin_siteaccess_name, '_fragment': 'layout/' ~ nglayouts.layout.id.toString() })) %}
+        {% set layouts_url = url('nglayouts_' ~ (nglayouts.debug ? 'dev_' : '') ~ 'app', {'siteaccess': admin_siteaccess_name, '_fragment': 'layout/' ~ nglayouts.layout.id.toString() }) %}
     {% endif %}
 
     <div
