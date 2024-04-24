@@ -1,1 +1,8 @@
 services:
+    netgen_toolbar.twig.global_variable:
+        class: Netgen\Bundle\ToolbarBundle\Twig\GlobalVariable
+        arguments:
+            - "@router"
+            - "@ibexa.config.resolver"
+            - "%ngsite.admin_siteaccess_name%"
+            - "%kernel.bundles%"

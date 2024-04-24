@@ -3,7 +3,6 @@
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     {% set admin_siteaccess_name = admin_siteaccess_name|default("admin") %}
     {% set offset_selectors = offset_selectors|default(["#page"]) %}
-    {% set admin_edit_base_url = admin_edit_base_url|default(url('ibexa.url.alias', {locationId: ibexa.configResolver.parameter('content.tree_root.location_id', null, 'default'), 'siteaccess': admin_siteaccess_name})) %}
 
     {% if content is defined and content is not null %}
         {% set cms_url = cms_url|default(url('ibexa.content.view', { 'contentId': content.id, 'siteaccess': admin_siteaccess_name })) %}
@@ -16,7 +15,7 @@
     <div
         id="ngtoolbar"
         class="ngtoolbar"
-        data-admin-edit-url-base-url="{{ admin_edit_base_url }}"
+        data-admin-url-template="{{ ngtoolbar.adminUrlTemplate }}"
     >
         <ul class="ngtoolbar__menu">
             {% if content is defined and content is not null %}
