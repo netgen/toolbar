@@ -2,7 +2,6 @@
 
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     {% set admin_siteaccess_name = admin_siteaccess_name|default("admin") %}
-    {% set offset_selectors = offset_selectors|default(["#page"]) %}
 
     {% if content is defined and location is defined %}
         {% set cms_url = ngtoolbar.adminUrlTemplate|replace({'{contentId}': content.id, '{locationId}': location.id}) %}
@@ -80,7 +79,7 @@
     <link rel="stylesheet" href="{{ asset('bundles/netgentoolbar/assets/toolbar.css') }}" />
 
     <style>
-        {% for selector in offset_selectors %}
+        {% for selector in offset_selectors|default(["#page"]) %}
             {{ selector }} {
                 margin-top: var(--ngtoolbar-height);
             }
