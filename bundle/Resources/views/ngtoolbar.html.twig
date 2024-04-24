@@ -3,14 +3,6 @@
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     {% set admin_siteaccess_name = admin_siteaccess_name|default("admin") %}
 
-    {% if content is defined and location is defined %}
-        {% set cms_url = ngtoolbar.adminUrlTemplate|replace({'{contentId}': content.id, '{locationId}': location.id}) %}
-    {% endif %}
-
-    {% if nglayouts.layout is not null %}
-        {% set layouts_url = url('nglayouts_' ~ (nglayouts.debug ? 'dev_' : '') ~ 'app', {'siteaccess': admin_siteaccess_name, '_fragment': 'layout/' ~ nglayouts.layout.id.toString() }) %}
-    {% endif %}
-
     <div
         id="ngtoolbar"
         class="ngtoolbar"
@@ -18,6 +10,8 @@
     >
         <ul class="ngtoolbar__menu">
             {% if content is defined and location is defined %}
+                {% set cms_url = ngtoolbar.adminUrlTemplate|replace({'{contentId}': content.id, '{locationId}': location.id}) %}
+
                 <li class="ngtoolbar__menu-item">
                     <a class="ngtoolbar__menu-link" target="_blank" href="{{ cms_url }}">
                         <img src="{{ asset('bundles/netgentoolbar/images/ibexa-logo.svg') }}"  />
@@ -27,6 +21,11 @@
             {% endif %}
 
             {% if nglayouts.layout is not null and (is_granted('ROLE_NGLAYOUTS_EDITOR') or is_granted('nglayouts:layout:edit', nglayouts.layout)) %}
+                {% set layouts_url = url('nglayouts_' ~ (nglayouts.debug ? 'dev_' : '') ~ 'app', {
+                    'siteaccess': admin_siteaccess_name,
+                    '_fragment': 'layout/' ~ nglayouts.layout.id.toString() }
+                ) %}
+
                 <li class="ngtoolbar__menu-item">
                     <a class="ngtoolbar__menu-link" target="_blank" href="{{ layouts_url }}">
                         <img src="{{ asset('bundles/netgentoolbar/images/layouts-logo.svg') }}" />
