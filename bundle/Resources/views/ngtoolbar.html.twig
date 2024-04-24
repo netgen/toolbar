@@ -4,11 +4,11 @@
     {% set admin_siteaccess_name = admin_siteaccess_name|default("admin") %}
     {% set offset_selectors = offset_selectors|default(["#page"]) %}
 
-    {% if content is defined and content is not null %}
-        {% set cms_url = url('ibexa.content.view', {'contentId': content.id, 'siteaccess': admin_siteaccess_name}) %}
+    {% if content is defined and location is defined %}
+        {% set cms_url = ngtoolbar.adminUrlTemplate|replace({'{contentId}': content.id, '{locationId}': location.id}) %}
     {% endif %}
 
-    {% if nglayouts.layout is not empty %}
+    {% if nglayouts.layout is not null %}
         {% set layouts_url = url('nglayouts_' ~ (nglayouts.debug ? 'dev_' : '') ~ 'app', {'siteaccess': admin_siteaccess_name, '_fragment': 'layout/' ~ nglayouts.layout.id.toString() }) %}
     {% endif %}
 
@@ -18,7 +18,7 @@
         data-admin-url-template="{{ ngtoolbar.adminUrlTemplate }}"
     >
         <ul class="ngtoolbar__menu">
-            {% if content is defined and content is not null %}
+            {% if content is defined and location is defined %}
                 <li class="ngtoolbar__menu-item">
                     <a class="ngtoolbar__menu-link" target="_blank" href="{{ cms_url }}">
                         <img src="{{ asset('bundles/netgentoolbar/images/ibexa-logo.svg') }}"  />
@@ -27,7 +27,7 @@
                 </li>
             {% endif %}
 
-            {% if nglayouts.layout is not empty and (is_granted('ROLE_NGLAYOUTS_EDITOR') or is_granted('nglayouts:layout:edit', nglayouts.layout)) %}
+            {% if nglayouts.layout is not null and (is_granted('ROLE_NGLAYOUTS_EDITOR') or is_granted('nglayouts:layout:edit', nglayouts.layout)) %}
                 <li class="ngtoolbar__menu-item">
                     <a class="ngtoolbar__menu-link" target="_blank" href="{{ layouts_url }}">
                         <img src="{{ asset('bundles/netgentoolbar/images/layouts-logo.svg') }}" />
