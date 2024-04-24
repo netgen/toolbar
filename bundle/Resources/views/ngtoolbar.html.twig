@@ -21,11 +21,7 @@
         <ul class="ngtoolbar__menu">
             {% if content is defined and content is not null %}
                 <li class="ngtoolbar__menu-item">
-                    <a
-                        class="ngtoolbar__menu-link"
-                        target="_blank"
-                        href="{{ cms_url }}"
-                    >
+                    <a class="ngtoolbar__menu-link" target="_blank" href="{{ cms_url }}">
                         <img src="{{ asset('bundles/netgentoolbar/images/ibexa-logo.svg') }}"  />
                         {{ 'ngtoolbar.admin_interface'|trans }}
                     </a>
@@ -34,12 +30,8 @@
 
             {% if nglayouts.layout is not empty and (is_granted('ROLE_NGLAYOUTS_EDITOR') or is_granted('nglayouts:layout:edit', nglayouts.layout)) %}
                 <li class="ngtoolbar__menu-item">
-                    <a
-                        class="ngtoolbar__menu-link"
-                        target="_blank"
-                        href="{{ layouts_url }}"
-                    >
-                        <img src="{{ asset('bundles/netgentoolbar/images/layouts-logo.svg') }}"  />
+                    <a class="ngtoolbar__menu-link" target="_blank" href="{{ layouts_url }}">
+                        <img src="{{ asset('bundles/netgentoolbar/images/layouts-logo.svg') }}" />
                         {{ nglayouts.layout.name }}
                     </a>
                 </li>
@@ -60,6 +52,7 @@
                     </span>
                 </button>
             </li>
+
             <li class="ngtoolbar__menu-item">
                 <button
                     class="ngtoolbar__menu-link js-toggle-mode"
@@ -75,23 +68,18 @@
                     </span>
                 </button>
             </li>
-
         </ul>
 
         <ul class="ngtoolbar__menu ngtoolbar__menu--secondary">
             <li class="ngtoolbar__menu-item">
-                <a
-                    class="ngtoolbar__menu-link"
-                    href="{{ url('logout') }}"
-                >
-                    {{ 'ngtoolbar.logout'|trans }}
-                </a>
+                <a class="ngtoolbar__menu-link" href="{{ url('logout') }}">{{ 'ngtoolbar.logout'|trans }}</a>
             </li>
         </ul>
     </div>
 
     <script src="{{ asset('bundles/netgentoolbar/assets/toolbar.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('bundles/netgentoolbar/assets/toolbar.css') }}" />
+
     <style>
         {% for selector in offset_selectors %}
             {{ selector }} {
