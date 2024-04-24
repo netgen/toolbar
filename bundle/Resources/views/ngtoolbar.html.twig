@@ -4,7 +4,10 @@
     {% set admin_siteaccess_name = admin_siteaccess_name|default("admin") %}
     {% set offset_selectors = offset_selectors|default(["#page"]) %}
     {% set admin_edit_base_url = admin_edit_base_url|default(url('ibexa.url.alias', {locationId: ibexa.configResolver.parameter('content.tree_root.location_id', null, 'default'), 'siteaccess': admin_siteaccess_name})) %}
-    {% set cms_url = cms_url|default(url('ibexa.content.view', { 'contentId': content.id, 'siteaccess': admin_siteaccess_name })) %}
+
+    {% if content is defined and content is not null %}
+        {% set cms_url = cms_url|default(url('ibexa.content.view', { 'contentId': content.id, 'siteaccess': admin_siteaccess_name })) %}
+    {% endif %}
 
     {% if nglayouts.layout is not empty %}
         {% set layouts_url = layouts_url|default(url('nglayouts_' ~ 'app', {'siteaccess': admin_siteaccess_name, '_fragment': 'layout/' ~ nglayouts.layout.id.toString() })) %}
