@@ -10,7 +10,7 @@
     {% endif %}
 
     {% if nglayouts.layout is not empty %}
-        {% set layouts_url = layouts_url|default(url('nglayouts_' ~ 'app', {'siteaccess': admin_siteaccess_name, '_fragment': 'layout/' ~ nglayouts.layout.id.toString() })) %}
+        {% set layouts_url = layouts_url|default(url('nglayouts_' ~ (nglayouts.debug ? 'dev_' : '') ~ 'app', {'siteaccess': admin_siteaccess_name, '_fragment': 'layout/' ~ nglayouts.layout.id.toString() })) %}
     {% endif %}
 
     <div
@@ -31,6 +31,7 @@
                     </a>
                 </li>
             {% endif %}
+
             {% if nglayouts.layout is not empty and (is_granted('ROLE_NGLAYOUTS_EDITOR') or is_granted('nglayouts:layout:edit', nglayouts.layout)) %}
                 <li class="ngtoolbar__menu-item">
                     <a
