@@ -10,13 +10,13 @@ composer require netgen/toolbar
 
 The Netgen Toolbar comes with its own set of assets. To build these assets for development or production environments, use the following commands:
 
-- For development:
+### For development
 
 ```bash
     pnpm run dev
 ```
 
-- For production:
+### For production
 
 ```bash
     pnpm run prod
@@ -82,7 +82,7 @@ The bundle includes a helper macros for adding necessary data parameters to comp
 
 Then, use it as follows:
 
-- block item view types:
+#### Block item view types
 
 ```twig
     <article {{ toolbar_macros.item_params(content, location) }}>
@@ -98,7 +98,7 @@ Rendered HTML:
 </article>
 ```
 
-- components:
+#### Components
 
 ```twig
     <div {{ toolbar_macros.component_params(block) }}>
