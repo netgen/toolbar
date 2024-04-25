@@ -54,12 +54,30 @@ To specify that no elements should be offset, pass an empty array:
 
 For additional custom adjustments, a CSS variable `--ngtoolbar-height` is provided and can be used throughout your projects CSS as needed.
 
+## How to mark elements that should be editable?
+
+Each component or item that is supposed to be editable has to have 2 data paramteras with content id location it and one unique data paramtera that indicates if its a component or item.
+
+```html
+<article data-item="true" data-content-id="43" data-location-id="23">
+  <!-- Your content here -->
+</article>
+```
+
+or
+
+```html
+<article data-componenet="true" data-content-id="43" data-location-id="23">
+  <!-- Your content here -->
+</article>
+```
+
 ### Helper Macro for Data Parameters
 
 The bundle includes a helper macros for adding necessary data parameters to components and items. First, import the macro into your template:
 
 ```twig
-    {% import "@NetgenToolbar/macros/admin_id.html.twig" as toolbar_macros %}
+    {% import "@NetgenToolbar/macros/admin_url_params.html.twig" as toolbar_macros %}
 ```
 
 Then, use it as follows:
@@ -67,15 +85,7 @@ Then, use it as follows:
 - block item view types:
 
 ```twig
-    <article {{ toolbar_macros.item_admin_id(content) }}>
-        <!-- Your content here -->
-    </article>
-```
-
-- block item view types (legacy):
-
-```twig
-    <article {{ toolbar_macros.item_admin_id_legacy(location) }}>
+    <article {{ toolbar_macros.item_params(content, location) }}>
         <!-- Your content here -->
     </article>
 ```
@@ -83,7 +93,7 @@ Then, use it as follows:
 Rendered html:
 
 ```html
-<article data-item-admin-id="43">
+<article data-item="true" data-content-id="43" data-location-id="23">
   <!-- Your content here -->
 </article>
 ```
@@ -91,7 +101,7 @@ Rendered html:
 - components:
 
 ```twig
-    <div {{ toolbar_macros.component_admin_id(block) }}>
+    <div {{ toolbar_macros.component_params(block) }}>
         <!-- Your content here -->
     </div>
 ```
@@ -99,7 +109,7 @@ Rendered html:
 Rendered html:
 
 ```html
-<article data-component-admin-id="43">
+<article data-component="true" data-content-id="43" data-location-id="23">
   <!-- Your content here -->
 </article>
 ```
