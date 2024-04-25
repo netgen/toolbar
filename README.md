@@ -56,10 +56,10 @@ For additional custom adjustments, a CSS variable `--ngtoolbar-height` is provid
 
 ### Helper Macro for Data Parameters
 
-The bundle includes a helper macro for adding necessary data parameters to components and items. First, import the macro into your template:
+The bundle includes a helper macros for adding necessary data parameters to components and items. First, import the macro into your template:
 
 ```twig
-    {% import "@NetgenToolbar/macros/content_id_data_param.html.twig" as toolbar_macros %}
+    {% import "@NetgenToolbar/macros/admin_id.html.twig" as toolbar_macros %}
 ```
 
 Then, use it as follows:
@@ -67,7 +67,15 @@ Then, use it as follows:
 - block item view types:
 
 ```twig
-    <article {{ toolbar_macros.content_id_data_param(null, content) }}>
+    <article {{ toolbar_macros.item_admin_id(content) }}>
+        <!-- Your content here -->
+    </article>
+```
+
+- block item view types (legacy):
+
+```twig
+    <article {{ toolbar_macros.item_admin_id_legacy(location) }}>
         <!-- Your content here -->
     </article>
 ```
@@ -83,7 +91,7 @@ Rendered html:
 - components:
 
 ```twig
-    <div {{ toolbar_macros.content_id_data_param(block) }}>
+    <div {{ toolbar_macros.component_admin_id(block) }}>
         <!-- Your content here -->
     </div>
 ```
