@@ -1,7 +1,0 @@
-{% macro item_admin_id(content = null) %}
-    {% if content is not null and content is defined %}
-        {% if content.id is not null %}
-            data-item-admin-id="{{ content.id }}"
-        {% endif %}
-    {% endif %}
-{% endmacro %}
