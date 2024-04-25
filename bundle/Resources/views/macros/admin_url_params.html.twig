@@ -1,38 +1,27 @@
-{% macro component_params(block = null) %}
-    {% if block is not null %}
-        {% set content_id = null %}
-        {% set location_id = null %}
+{% macro component_params(block) %}
+    {% set content_id = null %}
+    {% set location_id = null %}
 
-        {% if
-            block.definition.identifier starts with 'ibexa_component'
-            and block.parameter('content').valueObject is not null
-        %}
-            {% set content_id = block.parameter('content').valueObject.id %}
-            {% set location_id = block.parameter('content').valueObject.mainLocationId %}
-            data-component="true"
-        {% endif %}
+    {% if
+        block.definition.identifier starts with 'ibexa_component'
+        and block.parameter('content').valueObject is not null
+    %}
+        {% set content_id = block.parameter('content').valueObject.id %}
+        {% set location_id = block.parameter('content').valueObject.mainLocationId %}
+        data-component="true"
+    {% endif %}
 
-        {% if content_id is not null %}
-            data-content-id="{{ content_id }}"
-        {% endif %}
+    {% if content_id is not null %}
+        data-content-id="{{ content_id }}"
+    {% endif %}
 
-        {% if location_id is not null %}
-            data-location-id="{{ location_id }}"
-        {% endif %}
+    {% if location_id is not null %}
+        data-location-id="{{ location_id }}"
     {% endif %}
 {% endmacro %}
 
-{% macro item_params(content = null, location = null) %}
+{% macro item_params(content, location) %}
     data-item="true"
-    {% apply spaceless %}
-        {% if content is not null %}
-            data-content-id="{{ content.id }}"
-        {% endif %}
-    {% endapply %}
-
-    {% apply spaceless %}
-        {% if location is not null %}
-            data-location-id="{{ location.id }}"
-        {% endif %}
-    {% endapply %}
+    data-content-id="{{ content.id }}"
+    data-location-id="{{ location.id }}"
 {% endmacro %}
