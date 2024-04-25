@@ -1,4 +1,5 @@
 {% macro component_params(block) %}
+{% apply spaceless %}
     {% set content_id = null %}
     {% set location_id = null %}
 
@@ -18,6 +19,7 @@
     {% if location_id is not null %}
         data-location-id="{{ location_id }}"
     {% endif %}
+{% endapply %}
 {% endmacro %}
 
 {% macro item_params(content, location) %}
