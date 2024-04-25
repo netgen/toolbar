@@ -1,6 +1,7 @@
 {% macro component_params(content_block = null) %}
     {% if content_block is not null %}
         {% set block_item_content_id = null %}
+        {% set block_item_location_id = null %}
 
         {% if
             content_block.hasParameter('content')
