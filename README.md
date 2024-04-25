@@ -26,7 +26,7 @@ The Netgen Toolbar comes with its own set of assets. To build these assets for d
 
 ### Integration into Templates
 
-To use the Netgen Toolbar in your project, include it in your base template or page layout. Here is a basic example:
+To use the Netgen Toolbar in your project, include it in your base template or page layout directly after opening `<body>` tag. Here is a basic example:
 
 ```twig
     {% include "@NetgenToolbar/ngtoolbar.html.twig" %}
@@ -54,23 +54,6 @@ To specify that no elements should be offset, pass an empty array:
 
 For additional custom adjustments, a CSS variable `--ngtoolbar-height` is provided and can be used throughout your projects CSS as needed.
 
-### Overriding Default Properties
-
-You can override default properties by passing additional parameters to the template. Available properties include:
-
-- `admin_edit_url_base_path`
-- `cms_url`
-- `layouts_url`
-
-```twig
-    {% include "@NetgenToolbar/ngtoolbar.html.twig" with {
-        offset_selectors: [],
-        admin_edit_url_base_path: "...",
-        cms_url: "...",
-        layouts_url: "...",
-    } %}
-```
-
 ### Helper Macro for Data Parameters
 
 The bundle includes a helper macro for adding necessary data parameters to components and items. First, import the macro into your template:
@@ -92,7 +75,7 @@ Then, use it as follows:
 Rendered html:
 
 ```html
-<article data-item-content-id="43">
+<article data-item-admin-id="43">
   <!-- Your content here -->
 </article>
 ```
@@ -108,7 +91,7 @@ Rendered html:
 Rendered html:
 
 ```html
-<article data-component-content-id="43">
+<article data-component-admin-id="43">
   <!-- Your content here -->
 </article>
 ```

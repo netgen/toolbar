@@ -9,7 +9,7 @@ class NgToolbar {
   toggleButtons: NodeListOf<HTMLButtonElement>;
   editableComponentBlocks: NodeListOf<HTMLElement>;
   editableItemBlocks: NodeListOf<HTMLElement>;
-  adminEditUrlBasePath: string | undefined;
+  adminUrlTemplate: string | undefined;
 
   constructor(el: HTMLElement) {
     this.el = el;
@@ -17,16 +17,12 @@ class NgToolbar {
     this.toggleButtons = this.el.querySelectorAll('.js-toggle-mode');
 
     this.editableComponentBlocks = document.querySelectorAll(
-      '[data-component-content-id]'
+      '[data-component-admin-id]'
     );
-    this.editableItemBlocks = document.querySelectorAll(
-      '[data-item-content-id]'
-    );
-    this.adminEditUrlBasePath = this.formatUrl(
-      this.el.dataset.adminEditUrlBasePath
-    );
+    this.editableItemBlocks = document.querySelectorAll('[data-item-admin-id]');
+    this.adminUrlTemplate = this.el.dataset.adminUrlTemplate;
 
-    if (!this.adminEditUrlBasePath) {
+    if (!this.adminUrlTemplate) {
       throw new Error('Admin edit url is undefined');
     }
 
@@ -37,12 +33,6 @@ class NgToolbar {
     this.toggleButtons.forEach((button) => {
       button.addEventListener('click', () => this.toggleViewMode(button));
     });
-  }
-
-  formatUrl(url: string | undefined) {
-    if (!url || url.charAt(url.length - 1) !== '/') return url;
-
-    return url.slice(0, -1);
   }
 
   getEditableBlocks(blockType: string | undefined) {
@@ -121,15 +111,14 @@ class NgToolbar {
 
     if (editButton && editOutline) return;
 
-    const contentId =
-      block.dataset.componentContentId || block.dataset.itemContentId;
+    const adminId = block.dataset.componentAdminId || block.dataset.itemAdminId;
 
-    if (!contentId) {
-      console.warn(`Content id on ${block} is missing`);
+    if (!adminId) {
+      console.warn(`Admin (content/location) id on ${block} is missing`);
       return;
     }
 
-    block.insertAdjacentHTML('beforeend', this.editButtonMarkup(contentId));
+    block.insertAdjacentHTML('beforeend', this.editButtonMarkup(adminId));
 
     if (block.style.position)
       block.setAttribute('data-inital-position', block.style.position);
@@ -154,17 +143,18 @@ class NgToolbar {
 
   get editButtonStyles() {
     return `
-            position: absolute;
-            top: 1px;
-            right: 1.25rem;
-            background: #9747FF;
-            color: white;
-            padding: .5rem;
-            z-index: 3;
-            cursor:pointer;
-            padding: 0.125rem;
-            `;
+        position: absolute;
+        top: 1px;
+        right: 1.25rem;
+        background: #9747FF;
+        color: white;
+        padding: .5rem;
+        z-index: 3;
+        cursor:pointer;
+        padding: 0.125rem;
+    `;
   }
+
   get editOutlineStyles() {
     return `
       position: absolute;
@@ -175,8 +165,11 @@ class NgToolbar {
     `;
   }
 
-  editButtonMarkup(contentId: string) {
-    const href = `${this.adminEditUrlBasePath}/view/content/${contentId}`;
+  editButtonMarkup(adminId: string) {
+    const href = this.adminUrlTemplate
+      ?.replace('{contentId}', adminId)
+      .replace('{locationId}', adminId);
+
     return `
       <a href='${href}' target="_blank" style="${this.editButtonStyles}" class="js-edit-button">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">

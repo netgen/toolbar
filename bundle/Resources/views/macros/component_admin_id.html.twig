@@ -1,4 +1,4 @@
-{% macro content_id_data_param(content_block = null, content = null) %}
+{% macro component_admin_id(content_block = null) %}
     {% if content_block is not null %}
         {% set block_item_content_id = null %}
 
@@ -12,13 +12,8 @@
             {% set block_item_content_id = content_block.parameter('content').valueObject.id %}
         {% endif %}
 
-
         {% if block_item_content_id is not null %}
-            data-component-content-id="{{ block_item_content_id }}"
-        {% endif %}
-    {% elseif content is not null and content is defined %}
-        {% if content.id is not null %}
-            data-item-content-id="{{ content.id }}"
+            data-component-admin-id="{{ block_item_content_id }}"
         {% endif %}
     {% endif %}
 {% endmacro %}

@@ -1,4 +1,6 @@
-const s="components",r="items",d="active";class l{constructor(t){if(this.el=t,this.toggleButtons=this.el.querySelectorAll(".js-toggle-mode"),this.editableComponentBlocks=document.querySelectorAll("[data-component-content-id]"),this.editableItemBlocks=document.querySelectorAll("[data-item-content-id]"),this.adminEditUrlBasePath=this.formatUrl(this.el.dataset.adminEditUrlBasePath),!this.adminEditUrlBasePath)throw new Error("Admin edit url is undefined");this.init()}init(){this.toggleButtons.forEach(t=>{t.addEventListener("click",()=>this.toggleViewMode(t))})}formatUrl(t){return!t||t.charAt(t.length-1)!=="/"?t:t.slice(0,-1)}getEditableBlocks(t){switch(t){case r:return this.editableItemBlocks;case s:return this.editableComponentBlocks;default:throw new Error("Block type is not one of: "+[r,s].join(" "))}}isButtonActive(t){return[...t.classList].includes(d)}toggleButtonIcon(t){const i=t.querySelector(".js-toggle-mode-icon");if(!i)return;const e=this.isButtonActive(t)?t.dataset.iconHideSrc:t.dataset.iconShowSrc;e&&(i.src=e)}toggleButtonLabel(t){const i=t.querySelector(".js-toggle-mode-label");if(!i)return;const e=this.isButtonActive(t)?t.dataset.labelHide:t.dataset.labelShow;e&&(i.innerHTML=e)}toggleButtonActive(t){t.classList.toggle(d)}removeEditButtonIfExists(t){const i=t.querySelector(".js-edit-button"),e=t.querySelector(".js-edit-outline");!i||!e||(i.remove(),e.remove(),t.dataset.initialPosition&&(t.style.position=t.dataset.initialPosition))}addEditButtonIfDoesntExist(t){const i=t.querySelector(".js-edit-button"),e=t.querySelector(".js-edit-outline");if(i&&e)return;const n=t.dataset.componentContentId||t.dataset.itemContentId;if(!n){console.warn(`Content id on ${t} is missing`);return}t.insertAdjacentHTML("beforeend",this.editButtonMarkup(n)),t.style.position&&t.setAttribute("data-inital-position",t.style.position),t.style.position="relative"}toggleViewMode(t){this.toggleButtonActive(t),this.toggleButtonIcon(t),this.toggleButtonLabel(t),this.getEditableBlocks(t.dataset.blockType).forEach(e=>{e.classList.toggle("js-editing-enabled"),this.removeEditButtonIfExists(e),this.addEditButtonIfDoesntExist(e)})}get editButtonStyles(){return`
+const s = "components", r = "items", d = "active"; class l {
+    constructor(t) { if (this.el = t, this.toggleButtons = this.el.querySelectorAll(".js-toggle-mode"), this.editableComponentBlocks = document.querySelectorAll("[data-component-admin-id]"), this.editableItemBlocks = document.querySelectorAll("[data-item-admin-id]"), this.adminEditUrlBasePath = this.formatUrl(this.el.dataset.adminEditUrlBasePath), !this.adminEditUrlBasePath) throw new Error("Admin edit url is undefined"); this.init() } init() { this.toggleButtons.forEach(t => { t.addEventListener("click", () => this.toggleViewMode(t)) }) } formatUrl(t) { return !t || t.charAt(t.length - 1) !== "/" ? t : t.slice(0, -1) } getEditableBlocks(t) { switch (t) { case r: return this.editableItemBlocks; case s: return this.editableComponentBlocks; default: throw new Error("Block type is not one of: " + [r, s].join(" ")) } } isButtonActive(t) { return [...t.classList].includes(d) } toggleButtonIcon(t) { const i = t.querySelector(".js-toggle-mode-icon"); if (!i) return; const e = this.isButtonActive(t) ? t.dataset.iconHideSrc : t.dataset.iconShowSrc; e && (i.src = e) } toggleButtonLabel(t) { const i = t.querySelector(".js-toggle-mode-label"); if (!i) return; const e = this.isButtonActive(t) ? t.dataset.labelHide : t.dataset.labelShow; e && (i.innerHTML = e) } toggleButtonActive(t) { t.classList.toggle(d) } removeEditButtonIfExists(t) { const i = t.querySelector(".js-edit-button"), e = t.querySelector(".js-edit-outline"); !i || !e || (i.remove(), e.remove(), t.dataset.initialPosition && (t.style.position = t.dataset.initialPosition)) } addEditButtonIfDoesntExist(t) { const i = t.querySelector(".js-edit-button"), e = t.querySelector(".js-edit-outline"); if (i && e) return; const n = t.dataset.componentContentId || t.dataset.itemContentId; if (!n) { console.warn(`Content id on ${t} is missing`); return } t.insertAdjacentHTML("beforeend", this.editButtonMarkup(n)), t.style.position && t.setAttribute("data-inital-position", t.style.position), t.style.position = "relative" } toggleViewMode(t) { this.toggleButtonActive(t), this.toggleButtonIcon(t), this.toggleButtonLabel(t), this.getEditableBlocks(t.dataset.blockType).forEach(e => { e.classList.toggle("js-editing-enabled"), this.removeEditButtonIfExists(e), this.addEditButtonIfDoesntExist(e) }) } get editButtonStyles() {
+        return `
             position: absolute;
             top: 1px;
             right: 1.25rem;
@@ -8,13 +10,15 @@ const s="components",r="items",d="active";class l{constructor(t){if(this.el=t,th
             z-index: 3;
             cursor:pointer;
             padding: 0.125rem;
-            `}get editOutlineStyles(){return`
+            `} get editOutlineStyles() {
+        return `
       position: absolute;
       z-index: 2;
       inset: 1px;
       pointer-events: none;
       border: 1px dashed #9747FF;
-    `}editButtonMarkup(t){return`
+    `} editButtonMarkup(t) {
+        return `
       <a href='${`${this.adminEditUrlBasePath}/view/content/${t}`}' target="_blank" style="${this.editButtonStyles}" class="js-edit-button">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g id="edit_FILL0_wght400_GRAD0_opsz24 1">
@@ -23,4 +27,5 @@ const s="components",r="items",d="active";class l{constructor(t){if(this.el=t,th
           </svg>
       </a>
       <div style="${this.editOutlineStyles}" class="js-edit-outline"></div>
-  `}}document.addEventListener("DOMContentLoaded",()=>{const o=document.querySelector("#ngtoolbar");o&&new l(o)});
+  `}
+} document.addEventListener("DOMContentLoaded", () => { const o = document.querySelector("#ngtoolbar"); o && new l(o) });
