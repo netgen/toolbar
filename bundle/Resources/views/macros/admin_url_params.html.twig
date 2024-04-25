@@ -18,7 +18,7 @@
             data-content-id="{{ block_item_content_id }}"
         {% endif %}
 
-        {% if block_item_location_id %}
+        {% if block_item_location_id is not null %}
             data-location-id="{{ block_item_location_id }}"
         {% endif %}
     {% endif %}
