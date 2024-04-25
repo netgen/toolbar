@@ -3,6 +3,8 @@ import '../scss/toolbar.scss';
 const COMPONENTS_BLOCK_TYPE = 'components';
 const ITEMS_BLOCK_TYPE = 'items';
 const ACTIVE_CLASS = 'active';
+const CONTENT_ID_PLACEHOLDER = '{contentId}';
+const LOCATION_ID_PLACEHOLDER = '{locationId}';
 
 class NgToolbar {
   el: HTMLElement;
@@ -90,12 +92,11 @@ class NgToolbar {
     button.classList.toggle(ACTIVE_CLASS);
   }
 
-  removeEditButtonIfExists(block: HTMLElement) {
-    const editButton = block.querySelector('.js-edit-button');
-    const editOutline = block.querySelector('.js-edit-outline');
-
-    if (!editButton || !editOutline) return;
-
+  removeEditButton(
+    block: HTMLElement,
+    editButton: Element,
+    editOutline: Element
+  ) {
     editButton.remove();
     editOutline.remove();
 
@@ -104,12 +105,7 @@ class NgToolbar {
     block.style.position = block.dataset.initialPosition;
   }
 
-  addEditButtonIfDoesntExist(block: HTMLElement) {
-    const editButton = block.querySelector('.js-edit-button');
-    const editOutline = block.querySelector('.js-edit-outline');
-
-    if (editButton && editOutline) return;
-
+  addEditButton(block: HTMLElement) {
     try {
       const href = this.formatEditButtonUrl(block);
       block.insertAdjacentHTML('beforeend', this.editButtonMarkup(href));
@@ -133,8 +129,14 @@ class NgToolbar {
     editableBlocks.forEach((block) => {
       block.classList.toggle('js-editing-enabled');
 
-      this.removeEditButtonIfExists(block);
-      this.addEditButtonIfDoesntExist(block);
+      const editButton = block.querySelector('.js-edit-button');
+      const editOutline = block.querySelector('.js-edit-outline');
+
+      if (editButton && editOutline) {
+        this.removeEditButton(block, editButton, editOutline);
+      } else {
+        this.addEditButton(block);
+      }
     });
   }
 
@@ -187,8 +189,12 @@ class NgToolbar {
     }
 
     let errors: string[] = [];
-    const shouldHaveContenId = this.adminUrlTemplate.includes('{contentId}');
-    const shouldHaveLocationId = this.adminUrlTemplate.includes('{locationId}');
+    const shouldHaveContenId = this.adminUrlTemplate.includes(
+      CONTENT_ID_PLACEHOLDER
+    );
+    const shouldHaveLocationId = this.adminUrlTemplate.includes(
+      LOCATION_ID_PLACEHOLDER
+    );
 
     if (shouldHaveContenId && !contentId) {
       errors.push('Content id is not defined.');
@@ -205,11 +211,11 @@ class NgToolbar {
     let url = this.adminUrlTemplate;
 
     if (shouldHaveContenId) {
-      url = url.replace('{contentId}', contentId!);
+      url = url.replace(CONTENT_ID_PLACEHOLDER, contentId!);
     }
 
     if (shouldHaveLocationId) {
-      url = url.replace('{locationId}', locationId!);
+      url = url.replace(LOCATION_ID_PLACEHOLDER, locationId!);
     }
 
     return url;
