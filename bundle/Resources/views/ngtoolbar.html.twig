@@ -1,6 +1,6 @@
 {% trans_default_domain 'ngtoolbar' %}
 
-{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+{% if is_granted('ibexa:ngtoolbar:use') %}
     {% set admin_siteaccess_name = admin_siteaccess_name|default("admin") %}
 
     <div

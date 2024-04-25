@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\ToolbarBundle\DependencyInjection;
 
+use RuntimeException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;
@@ -21,6 +22,14 @@ final class NetgenToolbarExtension extends Extension implements PrependExtension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
+        /** @var array<string, string> $activatedBundles */
+        $activatedBundles = $container->getParameter('kernel.bundles');
+
+        $activatedBundles['EzCoreExtraBundle'] ??
+            throw new RuntimeException(
+                'Netgen Toolbar Bundle requires EzCoreExtraBundle (lolautruche/ez-core-extra-bundle) to be activated to work properly.',
+            );
+
         $locator = new FileLocator(__DIR__ . '/../Resources/config');
         $loader = new DelegatingLoader(
             new LoaderResolver(

@@ -116,4 +116,4 @@ Rendered HTML:
 
 ## Visibility conditions
 
-The toolbar is displayed only to authenticated users who have the `IS_AUTHENTICATED_REMEMBERED` role, ensuring that only authorized users can access toolbar functionalities.
+The toolbar is displayed only to authenticated users who have the `ngtoolbar/use` Ibexa policy, ensuring that only authorized users can access toolbar functionalities.
