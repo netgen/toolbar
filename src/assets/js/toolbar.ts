@@ -16,10 +16,9 @@ class NgToolbar {
 
     this.toggleButtons = this.el.querySelectorAll('.js-toggle-mode');
 
-    this.editableComponentBlocks = document.querySelectorAll(
-      '[data-component-admin-id]'
-    );
-    this.editableItemBlocks = document.querySelectorAll('[data-item-admin-id]');
+    this.editableComponentBlocks =
+      document.querySelectorAll('[data-component]');
+    this.editableItemBlocks = document.querySelectorAll('[data-item]');
     this.adminUrlTemplate = this.el.dataset.adminUrlTemplate;
 
     if (!this.adminUrlTemplate) {
@@ -111,19 +110,17 @@ class NgToolbar {
 
     if (editButton && editOutline) return;
 
-    const adminId = block.dataset.componentAdminId || block.dataset.itemAdminId;
+    try {
+      const href = this.formatEditButtonUrl(block);
+      block.insertAdjacentHTML('beforeend', this.editButtonMarkup(href));
 
-    if (!adminId) {
-      console.warn(`Admin (content/location) id on ${block} is missing`);
-      return;
+      if (block.style.position)
+        block.setAttribute('data-inital-position', block.style.position);
+
+      block.style.position = 'relative';
+    } catch (error) {
+      console.warn(error);
     }
-
-    block.insertAdjacentHTML('beforeend', this.editButtonMarkup(adminId));
-
-    if (block.style.position)
-      block.setAttribute('data-inital-position', block.style.position);
-
-    block.style.position = 'relative';
   }
 
   toggleViewMode(button: HTMLButtonElement) {
@@ -165,11 +162,7 @@ class NgToolbar {
     `;
   }
 
-  editButtonMarkup(adminId: string) {
-    const href = this.adminUrlTemplate
-      ?.replace('{contentId}', adminId)
-      .replace('{locationId}', adminId);
-
+  editButtonMarkup(href: string) {
     return `
       <a href='${href}' target="_blank" style="${this.editButtonStyles}" class="js-edit-button">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -180,6 +173,46 @@ class NgToolbar {
       </a>
       <div style="${this.editOutlineStyles}" class="js-edit-outline"></div>
   `;
+  }
+
+  formatEditButtonUrl(block: HTMLElement) {
+    const {contentId, locationId} = block.dataset;
+
+    if (!this.adminUrlTemplate) {
+      throw new Error('Admin url template is undefined');
+    }
+
+    if (!contentId && !locationId) {
+      throw new Error(`Neither location id nor content id are set on ${block}`);
+    }
+
+    let errors: string[] = [];
+    const shouldHaveContenId = this.adminUrlTemplate.includes('{contentId}');
+    const shouldHaveLocationId = this.adminUrlTemplate.includes('{locationId}');
+
+    if (shouldHaveContenId && !contentId) {
+      errors.push('Content id is not defined.');
+    }
+
+    if (shouldHaveLocationId && !locationId) {
+      errors.push('Location id is not defined.');
+    }
+
+    if (errors.length > 0) {
+      throw Error(errors.join('\n'));
+    }
+
+    let url = this.adminUrlTemplate;
+
+    if (shouldHaveContenId) {
+      url = url.replace('{contentId}', contentId!);
+    }
+
+    if (shouldHaveLocationId) {
+      url = url.replace('{locationId}', locationId!);
+    }
+
+    return url;
   }
 }
 
