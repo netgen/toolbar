@@ -11,7 +11,7 @@
             and content_block.parameter('content').valueObject.contentInfo.contentTypeIdentifier starts with "ng_component_"
         %}
             {% set block_item_content_id = content_block.parameter('content').valueObject.id %}
-            {% set block_item_location_id = content_block.parameter('location').valueObject.id %}
+            {% set block_item_location_id = block.parameter('content').valueObject.mainLocationId %}
             data-component="true"
         {% endif %}
 
