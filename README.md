@@ -6,7 +6,7 @@ To add the Netgen Toolbar to your Symfony project, use Composer for easy install
 composer require netgen/toolbar
 ```
 
-## Building the Project Assets
+## Building the project assets (for development purposes)
 
 The Netgen Toolbar comes with its own set of assets. To build these assets for development or production environments, use the following commands:
 
@@ -24,15 +24,15 @@ The Netgen Toolbar comes with its own set of assets. To build these assets for d
 
 ## Usage
 
-### Integration into Templates
+### Integration into templates
 
-To use the Netgen Toolbar in your project, include it in your base template or page layout directly after opening `<body>` tag. Here is a basic example:
+To use the Netgen Toolbar in your project, include it in your pagelayout template, directly after the opening `<body>` tag. Here is a basic example:
 
 ```twig
     {% include "@NetgenToolbar/ngtoolbar.html.twig" %}
 ```
 
-### Adjusting for Additional Elements
+### Adjusting for additional elements
 
 If your layout includes elements like a sticky header that should be offset by the toolbar's height, you can specify additional CSS selectors. By default, only `#page` is adjusted. Here's how to include a sticky header in the offset calculation:
 
@@ -50,13 +50,13 @@ To specify that no elements should be offset, pass an empty array:
     } %}
 ```
 
-## Custom Adjustments Using CSS
+## Custom adjustments using CSS
 
-For additional custom adjustments, a CSS variable `--ngtoolbar-height` is provided and can be used throughout your projects CSS as needed.
+For additional custom adjustments, a CSS variable `--ngtoolbar-height` is provided and can be used throughout your project's CSS as needed.
 
 ## How to mark elements that should be editable?
 
-Each component or item that is supposed to be editable has to have 2 data paramteras with content id location it and one unique data paramtera that indicates if its a component or item.
+Each component or block item that is supposed to be editable needs to have 2 data parameters with content ID and location ID and one unique data parameter that indicates if it's a component or a block item.
 
 ```html
 <article data-item="true" data-content-id="43" data-location-id="23">
@@ -67,14 +67,14 @@ Each component or item that is supposed to be editable has to have 2 data paramt
 or
 
 ```html
-<article data-componenet="true" data-content-id="43" data-location-id="23">
+<article data-component="true" data-content-id="43" data-location-id="23">
   <!-- Your content here -->
 </article>
 ```
 
-### Helper Macro for Data Parameters
+### Helper macro for data parameters
 
-The bundle includes a helper macros for adding necessary data parameters to components and items. First, import the macro into your template:
+The bundle includes a helper macros for adding necessary data parameters to components and block items. First, import the macro into your template:
 
 ```twig
     {% import "@NetgenToolbar/macros/admin_url_params.html.twig" as toolbar_macros %}
@@ -90,7 +90,7 @@ Then, use it as follows:
     </article>
 ```
 
-Rendered html:
+Rendered HTML:
 
 ```html
 <article data-item="true" data-content-id="43" data-location-id="23">
@@ -106,7 +106,7 @@ Rendered html:
     </div>
 ```
 
-Rendered html:
+Rendered HTML:
 
 ```html
 <article data-component="true" data-content-id="43" data-location-id="23">
@@ -114,6 +114,6 @@ Rendered html:
 </article>
 ```
 
-## Visibility Conditions
+## Visibility conditions
 
 The toolbar is displayed only to authenticated users who have the `IS_AUTHENTICATED_REMEMBERED` role, ensuring that only authorized users can access toolbar functionalities.
