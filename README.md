@@ -77,7 +77,7 @@ or
 The bundle includes a helper macros for adding necessary data parameters to components and block items. First, import the macro into your template:
 
 ```twig
-    {% import "@NetgenToolbar/macros/admin_url_params.html.twig" as toolbar_macros %}
+    {% import "@NetgenToolbar/macros.html.twig" as toolbar_macros %}
 ```
 
 Then, use it as follows:
