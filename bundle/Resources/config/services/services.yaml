@@ -1,3 +1,6 @@
+parameters:
+    netgen_toolbar.legacy_admin_siteaccess_name: ngadminui
+
 services:
     netgen_toolbar.twig.global_variable:
         class: Netgen\Bundle\ToolbarBundle\Twig\GlobalVariable
@@ -5,4 +8,5 @@ services:
             - "@router"
             - "@ibexa.config.resolver"
             - "%ngsite.admin_siteaccess_name%"
+            - "%netgen_toolbar.legacy_admin_siteaccess_name%"
             - "%kernel.bundles%"
