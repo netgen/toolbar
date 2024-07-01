@@ -10,3 +10,4 @@ services:
             - "%ngsite.admin_siteaccess_name%"
             - "%netgen_toolbar.legacy_admin_siteaccess_name%"
             - "%kernel.bundles%"
+            - "@request_stack"
