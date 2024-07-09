@@ -30,6 +30,13 @@ final class NetgenToolbarExtension extends Extension implements PrependExtension
                 'Netgen Toolbar Bundle requires EzCoreExtraBundle (lolautruche/ez-core-extra-bundle) to be activated to work properly.',
             );
 
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $container->setParameter('netgen_toolbar.default_admin_site_access', $config['default_admin_site_access']);
+        $container->setParameter('netgen_toolbar.legacy_admin_site_access', $config['legacy_admin_site_access']);
+        $container->setParameter('netgen_toolbar.admin_site_access_mapping', $config['admin_site_access_mapping']);
+
         $locator = new FileLocator(__DIR__ . '/../Resources/config');
         $loader = new DelegatingLoader(
             new LoaderResolver(

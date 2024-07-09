@@ -6,23 +6,31 @@ To add the Netgen Toolbar to your Symfony project, use Composer for easy install
 composer require netgen/toolbar
 ```
 
-## Building the project assets (for development purposes)
-
-The Netgen Toolbar comes with its own set of assets. To build these assets for development or production environments, use the following commands:
-
-### For development
-
-```bash
-    pnpm run dev
-```
-
-### For production
-
-```bash
-    pnpm run prod
-```
-
 ## Usage
+
+### Configuration
+
+By default, the toolbar uses the Ibexa admin siteaccess configured by the `%ngsite.admin_siteaccess_name%` parameter
+available in Netgen Media Site. If you need some more control over the admin siteaccess which will be used, you can
+use the configuration similar to the example below:
+
+```yaml
+netgen_toolbar:
+    # Specifies the default admin siteaccess name, used when nothing else is configured
+    default_admin_site_access: my_admin
+
+    # Specifies the legacy siteaccess name, used when Toolbar detects the usage of Netgen Admin UI
+    legacy_admin_site_access: legacy_admin
+
+    # Specifies the map between siteaccesses/groups and admin siteaccess names to be used when current siteaccess
+    # matches one of the keys in this list. In this list, siteaccesses have priority over groups.
+    admin_site_access_mapping:
+        fh_eng: fh_admin
+        bold_eng: bold_admin
+        bold_group: bold_admin
+```
+
+All of these configuration options are optional.
 
 ### Integration into templates
 
@@ -117,3 +125,19 @@ Rendered HTML:
 ## Visibility conditions
 
 The toolbar is displayed only to authenticated users who have the `ngtoolbar/use` Ibexa policy, ensuring that only authorized users can access toolbar functionalities.
+
+## Building the project assets (for development purposes)
+
+The Netgen Toolbar comes with its own set of assets. To build these assets for development or production environments, use the following commands:
+
+### For development
+
+```bash
+    pnpm run dev
+```
+
+### For production
+
+```bash
+    pnpm run prod
+```

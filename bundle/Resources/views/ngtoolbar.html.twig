@@ -1,8 +1,6 @@
 {% trans_default_domain 'ngtoolbar' %}
 
 {% if is_granted('ibexa:ngtoolbar:use') %}
-    {% set admin_siteaccess_name = admin_siteaccess_name|default("admin") %}
-
     <div
         id="ngtoolbar"
         class="ngtoolbar"
@@ -22,7 +20,7 @@
 
             {% if nglayouts.layout is not null and (is_granted('ROLE_NGLAYOUTS_EDITOR') or is_granted('nglayouts:layout:edit', nglayouts.layout)) %}
                 {% set layouts_url = url('nglayouts_' ~ (nglayouts.debug ? 'dev_' : '') ~ 'app', {
-                    'siteaccess': admin_siteaccess_name,
+                    'siteaccess': ngtoolbar.adminSiteAccessName,
                     '_fragment': 'layout/' ~ nglayouts.layout.id.toString() }
                 ) %}
 
