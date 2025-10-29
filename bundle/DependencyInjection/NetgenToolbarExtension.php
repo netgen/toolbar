@@ -25,8 +25,8 @@ final class NetgenToolbarExtension extends Extension implements PrependExtension
         /** @var array<string, string> $activatedBundles */
         $activatedBundles = $container->getParameter('kernel.bundles');
 
-        $activatedBundles['EzCoreExtraBundle'] ??
-            throw new RuntimeException(
+        $activatedBundles['EzCoreExtraBundle']
+            ?? throw new RuntimeException(
                 'Netgen Toolbar Bundle requires EzCoreExtraBundle (lolautruche/ez-core-extra-bundle) to be activated to work properly.',
             );
 
