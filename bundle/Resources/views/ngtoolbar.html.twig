@@ -18,7 +18,7 @@
                 </li>
             {% endif %}
 
-            {% if nglayouts is defined and nglayouts.layout is not null and (is_granted('ROLE_NGLAYOUTS_EDITOR') or is_granted('nglayouts:layout:edit', nglayouts.layout)) %}
+            {% if nglayouts.layout is not null and (is_granted('ROLE_NGLAYOUTS_EDITOR') or is_granted('nglayouts:layout:edit', nglayouts.layout)) %}
                 {% set layouts_url = url('nglayouts_' ~ (nglayouts.debug ? 'dev_' : '') ~ 'app', {
                     'siteaccess': ngtoolbar.adminSiteAccessName,
                     '_fragment': 'layout/' ~ nglayouts.layout.id.toString() }
