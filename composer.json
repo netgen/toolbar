@@ -16,8 +16,8 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "ibexa/core": "^4.0"
+        "php": "^8.3",
+        "ibexa/core": "^5.0"
     },
     "require-dev": {
         "php-cs-fixer/shim": "^3.50"
