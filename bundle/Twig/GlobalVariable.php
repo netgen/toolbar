@@ -10,8 +10,8 @@ use Netgen\Bundle\ToolbarBundle\SiteAccess\AdminSiteAccessResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 use function array_key_exists;
+use function mb_trim;
 use function sprintf;
-use function trim;
 
 final class GlobalVariable
 {
@@ -38,10 +38,10 @@ final class GlobalVariable
         );
 
         if ($this->hasLegacyAdmin()) {
-            return sprintf('%s/%s', trim($baseUrl, '/'), 'content/view/full/{locationId}');
+            return sprintf('%s/%s', mb_trim($baseUrl, '/'), 'content/view/full/{locationId}');
         }
 
-        return sprintf('%s/%s', trim($baseUrl, '/'), 'view/content/{contentId}');
+        return sprintf('%s/%s', mb_trim($baseUrl, '/'), 'view/content/{contentId}');
     }
 
     public function getAdminSiteAccessName(): string

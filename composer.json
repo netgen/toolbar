@@ -16,11 +16,11 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "ibexa/core": "^5.0"
     },
     "require-dev": {
-        "php-cs-fixer/shim": "^3.50"
+        "netgen/coding-standard": "^1.0"
     },
     "config": {
         "allow-plugins": false
@@ -34,7 +34,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "2.0.x-dev"
         }
     }
 }
