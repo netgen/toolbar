@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^8.4",
-        "ibexa/core": "^5.0"
+        "ibexa/core": "^5.0.10"
     },
     "require-dev": {
         "netgen/coding-standard": "^1.0"

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\ToolbarBundle\Twig;
 
-use Ibexa\Bundle\Core\DependencyInjection\Configuration\ConfigResolver;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Netgen\Bundle\ToolbarBundle\SiteAccess\AdminSiteAccessResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -31,7 +30,7 @@ final class GlobalVariable
         $baseUrl = $this->urlGenerator->generate(
             'ibexa.url.alias',
             [
-                'locationId' => $this->configResolver->getParameter('content.tree_root.location_id', null, ConfigResolver::SCOPE_DEFAULT),
+                'locationId' => $this->configResolver->getParameter('content.tree_root.location_id', null, ConfigResolverInterface::SCOPE_DEFAULT),
                 'siteaccess' => $this->getAdminSiteAccessName(),
             ],
             UrlGeneratorInterface::ABSOLUTE_URL,
